@@ -20,8 +20,8 @@ module Authentication
         kubectl_exec:           KubectlExec,
         validate_pod_request:   ValidatePodRequest.new,
         audit_log:              ::Audit.logger
-      },
-      inputs: %i(conjur_account service_id csr host_id_prefix)
+    },
+      inputs: %i(conjur_account service_id csr host_id_prefix origin)
     ) do
 
       # :reek:TooManyStatements
@@ -189,6 +189,7 @@ module Authentication
             authenticator_name: KUBERNETES_AUTHENTICATOR_NAME,
             service: webservice,
             role: host,
+            client_ip: @origin,
             success: true,
             error_message: nil
           )
@@ -201,6 +202,7 @@ module Authentication
             authenticator_name: KUBERNETES_AUTHENTICATOR_NAME,
             service: webservice,
             role: host,
+            client_ip: @origin,
             success: false,
             error_message: err.message
           )

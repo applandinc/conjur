@@ -12,6 +12,7 @@ module Audit
 
         def initialize(
           role:,
+          client_ip:,
           authenticator_name:,
           service:,
           success:,
@@ -21,6 +22,7 @@ module Audit
           @error_message = error_message
           @authn = Authn.new(
             role: role,
+            client_ip: client_ip,
             authenticator_name: authenticator_name,
             service: service,
             success: success,

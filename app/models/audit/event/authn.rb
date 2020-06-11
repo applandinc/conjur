@@ -3,8 +3,16 @@ module Audit
     # Note: Breaking this class up further would harm clarity.
     # :reek:TooManyInstanceVariables
     class Authn
-      def initialize(role:, authenticator_name:, service:, success:, operation:)
+      def initialize(
+          role:,
+          client_ip:,
+          authenticator_name:,
+          service:,
+          success:,
+          operation:
+      )
         @role = role
+        @client_ip = client_ip
         @authenticator_name = authenticator_name
         @service = service
         @success = success
@@ -52,7 +60,8 @@ module Audit
       def structured_data
         {
           SDID::SUBJECT => { role: @role&.id },
-          SDID::AUTH => auth_stuctured_data
+          SDID::AUTH => auth_stuctured_data,
+          SDID::CLIENT => { ip: @client_ip }
         }.merge(
           attempted_action.action_sd
         )

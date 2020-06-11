@@ -2,8 +2,15 @@ module Audit
   module Event
     class Update
 
-      def initialize(user:, resource:, success:, error_message: nil)
+      def initialize(
+        user:,
+        client_ip:,
+        resource:,
+        success:,
+        error_message: nil
+      )
         @user = user
+        @client_ip = client_ip
         @resource = resource
         @success = success
         @error_message = error_message
@@ -50,7 +57,8 @@ module Audit
       def structured_data
         {
           SDID::AUTH => { user: @user.id },
-          SDID::SUBJECT => Subject::Resource.new(@resource.pk_hash).to_h
+          SDID::SUBJECT => Subject::Resource.new(@resource.pk_hash).to_h,
+          SDID::CLIENT => { ip: @client_ip }
         }.merge(
           attempted_action.action_sd
         )
