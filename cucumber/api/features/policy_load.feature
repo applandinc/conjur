@@ -82,6 +82,7 @@ Feature: Updating policies
     When I use curl to load a policy with special characters and no content type
     Then the command is successful
 
+  @appmap-disable
   Scenario: A large policy with no content type header
     When I clear the "Content-Type" header
     And I load a large policy with POST
