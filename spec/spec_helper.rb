@@ -21,6 +21,8 @@ ENV.delete('CONJUR_ADMIN_PASSWORD')
 
 $LOAD_PATH << '../app/domain'
 
+require 'appmap/rspec'
+
 RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
