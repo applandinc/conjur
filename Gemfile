@@ -73,6 +73,8 @@ gem 'uglifier'
 # for AWS rotator
 gem 'aws-sdk-iam', require: false
 
+gem 'appmap'
+
 group :production do
   gem 'rails_12factor'
 end

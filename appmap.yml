@@ -1,0 +1,7 @@
+name: cyberark-conjur/conjur
+packages:
+- path: app/controllers
+- path: app/domain
+- path: app/models
+- path: engines/conjur_audit/app/controllers
+- path: engines/conjur_audit/app/models
